@@ -3,16 +3,16 @@ import foodImage from './assets/food.png';
 import drinkImage from './assets/drinks.png';
 import './App.css';
 import { nanoid } from 'nanoid';
-import {IProduct} from "./types";
+import { IProduct } from "./types";
 
 const App = () => {
-    const [products, setProducts] = useState<IProduct[]>([
+    const [products] = useState<IProduct[]>([
         { id: nanoid(), name: 'Hamburger', price: 80, image: foodImage, count: 0 },
-        { id: nanoid(), name: 'Cheeseburger', price: 90, image: foodImage, count: 0  },
+        { id: nanoid(), name: 'Cheeseburger', price: 90, image: foodImage, count: 0 },
         { id: nanoid(), name: 'Fries', price: 45, image: foodImage, count: 0 },
-        { id: nanoid(), name: 'Coffee', price: 70, image: drinkImage, count: 0  },
-        { id: nanoid(), name: 'Tea', price: 50, image: drinkImage, count: 0  },
-        { id: nanoid(), name: 'Cola', price: 40, image: drinkImage, count: 0  },
+        { id: nanoid(), name: 'Coffee', price: 70, image: drinkImage, count: 0 },
+        { id: nanoid(), name: 'Tea', price: 50, image: drinkImage, count: 0 },
+        { id: nanoid(), name: 'Cola', price: 40, image: drinkImage, count: 0 },
     ]);
 
     const [order, setOrder] = useState<IProduct[]>([]);
@@ -67,19 +67,28 @@ const App = () => {
     return (
         <div className="App">
             <div className="left">
-                <div>
-                    <strong>Total price: {totalPrice} KGS</strong>
-                </div>
-                {order.map((item) => (
-                    <div key={item.id}>
-                        {item.name} - {item.count}
-                        <button onClick={() => removeClick(item.id, item.price, item.count)}>X</button>
-                    </div>
-                ))}
+                {order.length === 0 ? (
+                    <strong>
+                        Order is empty!
+                        <span style={{ display: "block" }}>Please add some items.</span>
+                    </strong>
+                ) : (
+                    <>
+                        <div>
+                            <b>Total price: {totalPrice}</b>
+                        </div>
+                        {order.map((item) => (
+                            <div key={item.id}>
+                                {item.name} - {item.count} : {(item.count * item.price)}
+                                <button onClick={() => removeClick(item.id, item.price, item.count)}>X</button>
+                            </div>
+                        ))}
+                    </>
+                )}
             </div>
             <div style={{ border: '1px solid black' }}>
                 {products.map((item) => (
-                    <div key={item.id} style={{ display: 'flex', alignItems: 'center', border: '1px solid black' }}>
+                    <div key={item.id} style={{ border: '1px solid black' }}>
                         <button style={{ width: '100%' }} onClick={() => buttonClick(item.id)}>
                             <img style={{ width: '75px' }} src={item.image} alt={item.name} />
                             <div>

@@ -9,3 +9,29 @@
   width: 400px;
 }
 
+.btn-remove {
+  margin: 14px 0 0 52px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 31px 32px 14px 19px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+  background-image: url("./assets/x.svg");
+  background-repeat: no-repeat;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+
+.btn-remove:active {
+  background-color: #228c1d;
+}
+
